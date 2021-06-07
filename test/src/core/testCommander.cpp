@@ -10,7 +10,7 @@ namespace {
     };
 }
 
-TEST_F(TestClass, Test_Base_Surport){
+TEST_F(TestClass, Test_Base_Surport) {
     auto cmd = string("ls");
     GTEST_ASSERT_EQ(
         string((
@@ -31,5 +31,23 @@ TEST_F(TestClass, Test_Base_Surport){
     );
     GTEST_ASSERT_EQ(
         string((*commands)[0]->argv[2]), string("-l")
+    );
+}
+
+TEST_F(TestClass, Test_Multi_Commands) {
+    auto commands = Commander::parser(string("ls -a -l && echo 123"));
+    GTEST_ASSERT_EQ(
+        string((*commands)[0]->filename), string("ls")
+    );
+    GTEST_ASSERT_EQ(
+        string((*commands)[1]->filename), string("echo")
+    );
+
+    commands = Commander::parser(string("ls -a -l; echo 123"));
+    GTEST_ASSERT_EQ(
+        string((*commands)[0]->filename), string("ls")
+    );
+    GTEST_ASSERT_EQ(
+        string((*commands)[1]->filename), string("echo")
     );
 }
