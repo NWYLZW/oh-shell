@@ -6,6 +6,7 @@ std::vector<Command*>* Commander::parser(
     auto commands = new std::vector<Command*>;
     commands->push_back(new Command);
 
+    const char * commandChars = commandStr.c_str();
     for (int i = 0; i < commandStr.length(); i++) {
         if (commandStr[i] != ' ') {
             int start = i;
@@ -14,10 +15,15 @@ std::vector<Command*>* Commander::parser(
                 && commandStr[++i] != ' '
             ) continue;
             auto cmd = (*commands)[commands->size() - 1];
-            cmd->argv.push_back(
-                (char *) commandStr.substr(start, i).c_str()
-            );
-            cmd->filename = cmd->argv[0];
+
+            char *subBuff = new char[i - start + 1];
+            memcpy(subBuff, &commandChars[start], i -start);
+            subBuff[i - start] = '\0';
+            cmd->argv.push_back(subBuff);
+
+            if (cmd->argv.size() == 1) {
+                cmd->filename = cmd->argv[0];
+            }
         }
     }
     return commands;

@@ -1,7 +1,9 @@
 add_executable(
-    test_cryptor ./core/testCrypt.cpp
+    test_commander
+    core/testCommander.cpp
+    ../../src/core/commander.cpp
 )
 
 target_link_libraries(
-    test_cryptor gtest gtest_main
+    test_commander gtest gtest_main
 )
