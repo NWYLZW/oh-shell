@@ -14,8 +14,10 @@ std::vector<Command*>* Commander::parser(
                 i < commandStr.length()
                 && commandStr[++i] != ' '
             ) continue;
+            // TODO fix commandStr maybe is ""
             auto cmd = (*commands)[commands->size() - 1];
 
+            // TODO refactor the following logic to a substr method
             char *subBuff = new char[i - start + 1];
             memcpy(subBuff, &commandChars[start], i -start);
             subBuff[i - start] = '\0';
@@ -41,6 +43,7 @@ int doDefaultCmd(Command c) {
 }
 
 int Commander::doCmd(Command c) {
+    // TODO fix command file name maybe is ""
     auto result = doDefaultCmd(c);
     if (result != -1) {
         return result;
