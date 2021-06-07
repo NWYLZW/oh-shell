@@ -29,9 +29,21 @@ std::vector<Command*>* Commander::parser(
     return commands;
 }
 
-int Commander::doCmd(Command c) {
+int doDefaultCmd(Command c) {
     if (strcmp(c.filename, "exit") == 0) {
         return 1;
+    } else if (strcmp(c.filename, "help") == 0) {
+        // TODO print help message.
+        std::cout << "This is help usage." << std::endl;
+        return 0;
+    }
+    return -1;
+}
+
+int Commander::doCmd(Command c) {
+    auto result = doDefaultCmd(c);
+    if (result != -1) {
+        return result;
     }
     pid_t pid;
     std::ostringstream os;
