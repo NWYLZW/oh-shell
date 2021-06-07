@@ -15,6 +15,7 @@ int main() {
 
     string input;
     while (true) {
+        // TODO print the current path and time after hostname
         cout
             << (isRight ? RESET : RED) << username << "@[" << hostname << "]" << endl
             << RESET;
