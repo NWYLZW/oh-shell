@@ -39,6 +39,7 @@ int doDefaultCmd(Command c) {
         std::cout << "This is help usage." << std::endl;
         return 0;
     }
+    // TODO add clear console as default command.
     return -1;
 }
 
