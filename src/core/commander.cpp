@@ -52,7 +52,7 @@ int doDefaultCmd(Command c) {
 }
 
 int Commander::doCmd(Command c) {
-    // TODO fix command file name maybe is ""
+    if (strcmp(c.filename, "") == 0) return 0;
     auto result = doDefaultCmd(c);
     if (result != -1) {
         return result;
