@@ -25,6 +25,7 @@ int main() {
 
         getline(cin, input);
 
+        bool isBreak = false;
         auto commands = Commander::parser(input);
         for (auto c : *commands) {
             try {
@@ -32,13 +33,14 @@ int main() {
 
                 auto result = Commander::doCmd(*c);
                 if (result == 1) {
-                    break;
+                    isBreak = true; break;
                 }
             } catch (std::string &msg) {
                 isRight = false;
                 cout << (isRight ? RESET : RED) << "Error: " << msg << endl;
             }
         }
+        if (isBreak) break;
     }
     cout << "See you~" << endl;
     return 0;
