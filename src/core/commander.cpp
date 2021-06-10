@@ -35,8 +35,9 @@ int doDefaultCmd(Command c) {
     if (strcmp(c.filename, "exit") == 0) {
         return 1;
     } else if (strcmp(c.filename, "help") == 0) {
-        // TODO print help message.
-        std::cout << "This is help usage." << std::endl;
+        std::cout
+            << "Usage: oh-shell [version-0.0.1]" << std::endl
+            << "Very simple shell." << std::endl;
         return 0;
     }
     // TODO add clear console as default command.
