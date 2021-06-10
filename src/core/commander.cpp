@@ -4,6 +4,7 @@ std::vector<Command*>* Commander::parser(
     const std::string& commandStr
     ) {
     auto commands = new std::vector<Command*>;
+    if (commandStr.empty()) return commands;
     commands->push_back(new Command);
 
     const char * commandChars = commandStr.c_str();
