@@ -14,7 +14,6 @@ std::vector<Command*>* Commander::parser(
                 i < commandStr.length()
                 && commandStr[++i] != ' '
             ) continue;
-            // TODO fix commandStr maybe is ""
             auto cmd = (*commands)[commands->size() - 1];
 
             // TODO refactor the following logic to a substr method
@@ -27,6 +26,9 @@ std::vector<Command*>* Commander::parser(
                 cmd->filename = cmd->argv[0];
             }
         }
+    }
+    for (const auto &command : *commands) {
+        command->argv.push_back(nullptr);
     }
     return commands;
 }
@@ -53,7 +55,8 @@ int Commander::doCmd(Command c) {
     pid_t pid;
     std::ostringstream os;
     if ((pid = fork()) == 0) {
-        if (execvp(c.filename, &c.argv[0]) < 0) {
+        auto doResult = execvp(c.filename, &c.argv[0]);
+        if (doResult < 0) {
             os << "'" << c.filename << "' command not found.";
             throw os.str();
         }
