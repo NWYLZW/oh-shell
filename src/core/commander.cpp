@@ -41,8 +41,12 @@ int doDefaultCmd(Command c) {
             << "Usage: oh-shell [version-0.0.1]" << std::endl
             << "Very simple shell." << std::endl;
         return 0;
+    } else if (strcmp(c.filename, "cd") == 0) {
+        if (c.argv.size() > 1) {
+            chdir(c.argv[1]);
+        }
+        return 0;
     }
-    // TODO add clear console as default command.
     return -1;
 }
 
